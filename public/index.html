@@ -1,0 +1,30 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Node.js App</title>
+</head>
+<body>
+  <h1>Simple Add Function</h1>
+  <form id="addForm">
+    <input type="number" id="a" placeholder="Enter a number" required>
+    <input type="number" id="b" placeholder="Enter another number" required>
+    <button type="submit">Add</button>
+  </form>
+  <p id="result"></p>
+
+  <script>
+    document.getElementById('addForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const a = document.getElementById('a').value;
+      const b = document.getElementById('b').value;
+      const response = await fetch(`/api/add?a=${a}&b=${b}`);
+      const data = await response.json();
+      document.getElementById('result').textContent = `Result: ${data.sum}`;
+    });
+  </script>
+</body>
+</html>
+
